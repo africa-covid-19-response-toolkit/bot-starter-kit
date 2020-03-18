@@ -1,0 +1,30 @@
+{
+  "name": "telegram_bot",
+  "version": "1.0.0",
+  "description": "telegram bot, add description later",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ethiopia-COVID19/bot.git"
+  },
+  "keywords": [
+    "bot",
+    "telegram",
+    "telegrambot"
+  ],
+  "author": "Sal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ethiopia-COVID19/bot/issues"
+  },
+  "homepage": "https://github.com/Ethiopia-COVID19/bot#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.0",
+    "telegraf": "^3.36.0",
+    "telegraf-flow": "^8.3.0"
+  }
+}
