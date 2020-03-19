@@ -1,0 +1,26 @@
+{
+  "name": "covid19ethiopia-viberbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "covid19",
+    "ethiopia",
+    "software",
+    "engineers",
+    "software",
+    "task",
+    "force",
+    "ethiopia",
+    "covid19community"
+  ],
+  "author": "danieladenew",
+  "license": "ISC",
+  "dependencies": {
+    "claudia-bot-builder": "^4.5.0",
+    "viber-bot": "^1.0.16"
+  }
+}
