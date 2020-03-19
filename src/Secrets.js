@@ -14,10 +14,10 @@ const LOG_TITLE = "COVID19 Log";
 
 const MAIN_CHANNEL_USERNAME = "";
 
-const ADMINS = []
+const ADMINS = [];
 
 
-const BOT_TOKEN = "819778324:AAEsM_p4hZbizY3zwz75uqhQooKBaMXSjMw";
+const BOT_TOKEN = process.env.BOT_TOKEN;
 
 
 

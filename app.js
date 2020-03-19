@@ -1,3 +1,4 @@
+require('dotenv').config();
 const Telegraf = require('telegraf');
 const TelegrafFlow = require('telegraf-flow');
 const flow = new TelegrafFlow();
@@ -52,11 +53,11 @@ flow.register(new Scenes().symptomScene());
 flow.register(new Scenes().statScene());
 
 
-bot.use(Telegraf.session())
-bot.use(flow.middleware())
+bot.use(Telegraf.session());
+bot.use(flow.middleware());
 
 
 // bot.telegram.setWebhook("https://.herokuapp.com/" + process.env.BOT_TOKEN);
 // bot.startWebhook('/' + process.env.BOT_TOKEN, null, process.env.PORT)
 
-bot.launch()
+bot.launch();
