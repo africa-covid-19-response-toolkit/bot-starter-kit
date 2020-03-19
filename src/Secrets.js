@@ -17,7 +17,7 @@ const MAIN_CHANNEL_USERNAME = "";
 const ADMINS = []
 
 
-const BOT_TOKEN = "819778324:AAEsM_p4hZbizY3zwz75uqhQooKBaMXSjMw";
+const BOT_TOKEN = "1008839856:AAEMdQT60kzbZZpXoqoqAvzaYmO4p63Dqt8";
 
 
 

@@ -8,11 +8,15 @@
  */
 
 
- const report_string = "📝 Report";
+ const report_string = "📝 Report Covid-19 Case";
  const about = "🎃 About";
  const cancel = "❌ Cancel";
  const symptom = "🌡 Symptoms";
- const statistics = "📉 Statistics";
+ const doihavecovid19 = "😷 Do I have Covid-19?";
+ const whatshouldido = "What should I have to do?";
+ const statistics = "🌍 📉 World Statistics";
+ const ethiopianstatistics = "🇪🇹 📉 Ethiopian Statistics";
+ const supportus = "👏 Support Us";
 
  // gender
  const male = "♂️ Male";
@@ -59,7 +63,10 @@
  module.exports.male = male;
  module.exports.female = female;
  module.exports.statistics = statistics;
-
+ module.exports.ethiopianstatistics = ethiopianstatistics;
+ module.exports.supportus = supportus;
+ module.exports.whatshouldido = whatshouldido;
+ module.exports.doihavecovid19 = doihavecovid19;
 
  module.exports.getName = getName;
  module.exports.invalidInput = invalidInput;

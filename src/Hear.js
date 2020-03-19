@@ -34,13 +34,30 @@ class Hear {
 
         this.ctx.hears(Strings.statistics, (ctx) => {
             ctx.flow.enter("statScene");
-        })
+        });
+
+       this.ctx.hears(Strings.ethiopianstatistics, (ctx) => {
+           ctx.flow.enter("ethioStatScene");
+        });
+
+        this.ctx.hears(Strings.supportus, (ctx) => {
+            ctx.flow.enter("supportusScene");
+        });
+
+       this.ctx.hears(Strings.doihavecovid19, (ctx) => {
+           ctx.flow.enter("doIhaveScene");
+        });
+
+        this.ctx.hears(Strings.whatshouldido, (ctx) => {
+            ctx.flow.enter("whatshouldScene");
+        });
 
         this.ctx.hears(Strings.cancel, (ctx) => {
             ctx.flow.leave();
 
             ctx.reply("Canceld!", this.keyboard.mainKeyboard());
         });
+
 
     }
 }

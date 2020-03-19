@@ -21,8 +21,9 @@ class Keyboard {
     mainKeyboard() {
         return Markup.keyboard([
             [Strings.symptom, Strings.report_string],
-            [Strings.statistics],
-            [Strings.about]
+            [Strings.statistics,Strings.ethiopianstatistics],
+            [Strings.whatshouldido,Strings.doihavecovid19],
+            [Strings.supportus,Strings.about]
         ])
         .oneTime()
         .resize()

@@ -27,7 +27,7 @@ const Strings = require("./Strings");
          greeter.enter((ctx) => {
              let fname = (ctx.from.first_name != undefined) ? ctx.from.first_name : ctx.from.username;
 
-             ctx.reply(`Hello ${fname}`, this.keyboard.mainKeyboard());
+             ctx.reply(`Greetings! ${fname}`, this.keyboard.mainKeyboard());
 
              // state
              new StatHandler().fetchData((data) => {
@@ -118,6 +118,84 @@ const Strings = require("./Strings");
 
          return report;
      }
+
+    doIhaveScene() {
+         const doIhaveScene = new Scene("doIhaveScene");
+
+
+         doIhaveScene.enter((ctx) => {
+             ctx.reply("doIhaveScene");
+
+             // enter a scene
+             ctx.flow.enter("getnameScene", ctx.flow.state);
+         
+            // Log
+            new Log(ctx).log("Clicked on Report button!");
+         });
+
+         doIhaveScene.leave((ctx) => {});
+
+         return doIhaveScene;
+     }
+
+    supportusScene() {
+         const supportusScene = new Scene("supportusScene");
+
+
+         supportusScene.enter((ctx) => {
+             ctx.reply("supportusScene");
+
+             // enter a scene
+             ctx.flow.enter("getnameScene", ctx.flow.state);
+         
+            // Log
+            new Log(ctx).log("Clicked on Report button!");
+         });
+
+         supportusScene.leave((ctx) => {});
+
+         return supportusScene;
+     }
+
+   ethioStatScene() {
+         const ethioStatScene = new Scene("ethioStatScene");
+
+
+         ethioStatScene.enter((ctx) => {
+             ctx.reply("ethioStatScene");
+
+             // enter a scene
+             ctx.flow.enter("getnameScene", ctx.flow.state);
+         
+            // Log
+            new Log(ctx).log("Clicked on Report button!");
+         });
+
+         ethioStatScene.leave((ctx) => {});
+
+         return ethioStatScene;
+     }
+
+
+   whatshouldScene() {
+         const whatshouldScene = new Scene("whatshouldScene");
+
+
+         whatshouldScene.enter((ctx) => {
+             ctx.reply("whatshouldScene");
+
+             // enter a scene
+             ctx.flow.enter("getnameScene", ctx.flow.state);
+         
+            // Log
+            new Log(ctx).log("Clicked on Report button!");
+         });
+
+         whatshouldScene.leave((ctx) => {});
+
+         return whatshouldScene;
+     }
+
 
 
      aboutScene() {
