@@ -283,7 +283,8 @@ const Strings = require("./Strings");
                 Extra.markup((markup) => {
                     return markup.resize()
                         .keyboard([
-                            markup.locationRequestButton('🗺 Send location')
+                            markup.locationRequestButton('🗺 Send location'),
+                            markup.button(Strings.cancel)
                         ])
                 })
             );
