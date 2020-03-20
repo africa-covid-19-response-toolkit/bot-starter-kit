@@ -8,7 +8,7 @@
 
 
 
-const LOG_ID = "-1001373040193";
+const LOG_ID = "-1008839856";
 const LOG_TITLE = "COVID19 Log";
 
 
