@@ -5,93 +5,128 @@ const BotEvents = require('viber-bot').Events;
 
 const ngrok = require('./get_public_urls');
 const TextMessage = require('viber-bot').Message.Text;
-const UrlMessage = require('viber-bot').Message.Url;
-const ContactMessage = require('viber-bot').Message.Contact;
+const UrlMessage = require('viber-bot').Message.Url;;
 const PictureMessage = require('viber-bot').Message.Picture;
-const VideoMessage = require('viber-bot').Message.Video;
-const LocationMessage = require('viber-bot').Message.Location;
-const StickerMessage = require('viber-bot').Message.Sticker;
-const RichMedia = require('viber-bot').Message.RichMedia;
 const KeyboardMessage = require('viber-bot').Message.Keyboard;
+
+const localConfig = require('./config');
+const keyboards = require('./keyboards');
+const bot_messages = require('./messages');
+
+function say(response, message) {
+    response.send(new TextMessage(message));
+}
+
+function on_option_kyboard(response){
+    response.send(new TextMessage(bot_messages.WELCOME_STATUS, keyboards.WELCOME_KEYBOARD));
+    //response.send(new KeyboardMessage(keyboards.OPTION_KEYBOARD));
+}
+
+function on_symptoms_keyboard(response){
+	//response.send(new TextMessage(bot_messages.SYMPTOMS, keyboards.WELCOME_KEYBOARD));
+	//bot.sendMessage([new TextMessage("Here's the product you've requested:"), new UrlMessage("http://my.ecommerce.site/product1"), new TextMessage("Shipping time: 1-3 business days")]);
+	//response.send(new KeyboardMessage(keyboards.LATE_KEYBOARD));
+		response.send(new PictureMessage("https://cdn.prod-carehubs.net/n1/802899ec472ea3d8/uploads/2020/03/shutterstock_1487854622_Fotor-16x9-1-1024x576-1.jpg", "COVID-19: Information on symptoms, transmission"));
+		response.send(new PictureMessage("https://www.cdc.gov/coronavirus/2019-ncov/images/symptoms-shortness-breath.jpg", "COVID-19: Information on symptoms, transmission"));
+		response.send(new PictureMessage("https://www.cdc.gov/coronavirus/2019-ncov/images/symptoms-fever.jp", "COVID-19: Information on symptoms, transmission"));
+		response.send(new PictureMessage("https://www.cdc.gov/coronavirus/2019-ncov/images/symptoms-cough.jpg", "COVID-19: Information on symptoms, transmission"));
+
+}
+
+function on_ethiopia_keyboard(response){
+    response.send(new TextMessage(bot_messages.ETHIOPIA, keyboards.DAYOFF_KEYBOARD));
+    //response.send(new KeyboardMessage(keyboards.DAYOFF_KEYBOARD));
+}
+
+function on_world_keyboard(response){
+    response.send(new TextMessage(bot_messages.WORLD, keyboards.WELCOME_KEYBOARD));
+    //response.send(new KeyboardMessage(keyboards.HALFDAYOFF_KEYBOARD));
+}
+
+function on_supportus_keyboard(response){
+    response.send(new TextMessage(bot_messages.SUPPORTUS, keyboards.WELCOME_KEYBOARD));
+    //response.send(new KeyboardMessage(keyboards.REASON_KEYBOARD));
+}
+
+function on_doihave_keyboard(response){
+    response.send(new TextMessage(bot_messages.DOIHAVE, keyboards.WELCOME_KEYBOARD));
+    //response.send(new KeyboardMessage(keyboards.REASON_KEYBOARD));
+}
+
+function on_what_keyboard(response){
+    response.send(new TextMessage(bot_messages.WHATDOIDO, keyboards.WELCOME_KEYBOARD));
+    //response.send(new KeyboardMessage(keyboards.REASON_KEYBOARD));
+}
+
+function on_helpme_keyboard(response){
+    response.send(new TextMessage(bot_messages.HELPME, keyboards.WELCOME_KEYBOARD));
+    //response.send(new KeyboardMessage(keyboards.REASON_KEYBOARD));
+}
 // Creating the bot with access token, name and avatar
 const bot = new ViberBot({
-	authToken: "4b3d286969a7d01a-d0252031ae8e858d-9b91e8775df0c6f2",
-	name: "covid19ethiopia",
-	avatar: "https://dl-media.viber.com/1/share/2/long/vibes/icon/image/0x0/eb3a/58464e735f9f6d54caf783fe8c117604d82a6bee12ebe18254e405b5d742eb3a.jpg" // It is recommended to be 720x720, and no more than 100kb.
+    authToken: localConfig.viber_auth_token, // <--- Paste your token here
+		name: "covid19ethiopia",
+		avatar: "https://dl-media.viber.com/1/share/2/long/vibes/icon/image/0x0/eb3a/58464e735f9f6d54caf783fe8c117604d82a6bee12ebe18254e405b5d742eb3a.jpg" // It is recommended to be 720x720, and no more than 100kb.
 });
 
+bot.on(BotEvents.SUBSCRIBED, response => {
+  //response.send(new TextMessage('Hi there ${response.userProfile.name}. I am ${bot.name}! Welcome to the offical Covid19Ethiopian Offical Update!'));
+	  response.send(new TextMessage(`Hi there ${response.userProfile.name}. Welcome to the offical Covid19Ethiopian Offical Update!`));
+	//response.send(new KeyboardMessage(keyboards.OPTION_KEYBOARD));
+});
 
-const SAMPLE_RICH_MEDIA = {
-	"ButtonsGroupColumns": 6,
-	"ButtonsGroupRows": 2,
-	"BgColor": "#FFFFFF",
-	"Buttons": [{
-		"ActionBody": "http://www.website.com/go_here",
-		"ActionType": "open-url",
-		"BgMediaType": "picture",
-		"Image": "http://www.images.com/img.jpg",
-		"BgColor": "#000000",
-		"TextOpacity": 60,
-		"Rows": 4,
-		"Columns": 6
-	}, {
-		"ActionBody": "http://www.website.com/go_here",
-		"ActionType": "open-url",
-		"BgColor": "#85bb65",
-		"Text": "Buy",
-		"TextOpacity": 60,
-		"Rows": 1,
-		"Columns": 6
-	}]
-};
+bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
+	response.send(new TextMessage("", keyboards.WELCOME_KEYBOARD));
+	//response.send(new KeyboardMessage(keyboards.WELCOME_KEYBOARD));
+});
 
-const SAMPLE_KEYBOARD = {
-	"Type": "keyboard",
-	"Revision": 1,
-	"Buttons": [
-		{
-			"Columns": 3,
-			"Rows": 2,
-			"BgColor": "#e6f5ff",
-			"BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-			"BgMediaType": "picture",
-			"BgLoop": true,
-			"ActionType": "reply",
-			"ActionBody": "Yes"
-		}
-	]
-};
-
-const message = new KeyboardMessage(SAMPLE_KEYBOARD);
 const userProfile = bot.onSubscribe(response => bot.getUserDetails(response.userProfile)
-        .then(userProfile => bot.postToPublicChat(userProfile, [
-	new TextMessage("Welcome to the offical viber channel for covid19-ethiopia information:"),
-	new TextMessage("Selamta! -  send hi or hello text"),
-    new TextMessage("Status of Covid-19 now! -  send status"),
-    new TextMessage("Status of Ethiopia Covid-19 now! -  send us"),
-    new TextMessage("Status of Africa Covid-19 now! -  send africa"),
-    new TextMessage("To Reports! - send Report Case"),
-    new TextMessage("Support Us! - send Support Info"),
-    new RichMedia(SAMPLE_RICH_MEDIA)
-])));
+        .then(userProfile => console.log(userProfile)));
 
-
-bot.onConversationStarted((userProfile, isSubscribed, context, onFinish) =>
-	onFinish(new TextMessage(`Hi, ${userProfile.name}! Nice to meet you.`)));
-
-bot.onConversationStarted((userProfile, isSubscribed, context, onFinish) =>
-	onFinish(new TextMessage(`Thanks`), {
-		saidThanks: true
-	}));
 // A simple regular expression to answer messages in the form of 'hi' and 'hello'.
-bot.onTextMessage(/^hi|hello$/i, (message, response) =>
-    response.send(new TextMessage(`Hi there ${response.userProfile.name}. Welcome to the offical Covid19Ethiopian Offical Update!`)));
+/*bot.onTextMessage(/^hi|hello$/i, (message, response) =>
+    response.send(new TextMessage(`Hi there ${response.userProfile.name}. Welcome to the offical Covid19Ethiopian Offical Update!`)));*/
 bot.onTextMessage(/^covid19|ethiopia$/i, (message, response) =>
-    response.send(new TextMessage(`There is 6 reported cases of COVID-19 in Ethiopia.`)));
+    response.send(new TextMessage(`There are 9 confirmed cases reported for COVID-19 in Ethiopia.`)));
 
-const messagePic = new PictureMessage("https://cdn.prod-carehubs.net/n1/802899ec472ea3d8/uploads/2020/03/shutterstock_1487854622_Fotor-16x9-1-1024x576-1.jpg", "COVID-19: Information on symptoms, transmission");
-
-console.log(`${messagePic.url}, ${messagePic.text}, ${messagePic.thumbnail}`);
+bot.onTextMessage(/./, (message, response) => {
+    switch(message.text) {
+        case 'Reload':
+            on_option_kyboard(response);
+            break;
+        case 'Symptoms':
+						on_symptoms_keyboard(response);
+						break;
+        case '5to10min':
+        case '30min':
+        case '1hr':
+        case 'more1hr':
+            reason_keyboard(response);
+            break;
+        case 'Ethiopia':
+            on_ethiopia_keyboard(response);
+            break;
+        case 'World':
+            on_world_keyboard(response);
+            break;
+        case 'Help':
+						on_helpme_keyboard(response);
+						break;
+        case 'Support':
+            on_supportus_keyboard(response);
+            break;
+        case 'DOI':
+				  on_doihave_keyboard(response);
+					break;
+        case 'What':
+					on_what_keyboard(response);
+					break;
+        case 'GPS':
+        case 'trainingtrip':
+        default :
+            response.send(new TextMessage("-- Menu--\n\ Volunteer coder/translater needed #bot-and-api slack page \n\to see Button Menu send \"Reload\""));
+    }
+});
 
 const http = require('http');
 const port = process.env.PORT || 8080;
@@ -102,5 +137,3 @@ return ngrok.getPublicUrl().then(publicUrl => {
     console.log('Can not connect to ngrok server. Is it running?');
     console.error(error);
 });
-
-
