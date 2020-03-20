@@ -17,11 +17,7 @@ const MAIN_CHANNEL_USERNAME = "";
 const ADMINS = []
 
 
-const BOT_TOKEN = "";
 
-
-
-module.exports.BOT_TOKEN = BOT_TOKEN;
 module.exports.LOG_ID = LOG_ID;
 module.exports.LOG_TITLE = LOG_TITLE;
 

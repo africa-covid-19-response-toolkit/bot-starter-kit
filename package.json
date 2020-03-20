@@ -23,7 +23,10 @@
   },
   "homepage": "https://github.com/Ethiopia-COVID19/bot#readme",
   "dependencies": {
+    "custom-env": "^2.0.1",
+    "firebase-admin": "^8.10.0",
     "node-fetch": "^2.6.0",
+    "novelcovid": "^1.0.4",
     "telegraf": "^3.36.0",
     "telegraf-flow": "^8.3.0"
   }

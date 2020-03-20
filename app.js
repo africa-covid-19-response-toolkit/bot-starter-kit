@@ -1,5 +1,7 @@
 const Telegraf = require('telegraf');
 const TelegrafFlow = require('telegraf-flow');
+require("custom-env").env("secrets");
+
 const flow = new TelegrafFlow();
 
 const Secrets = require("./src/Secrets");
@@ -10,7 +12,7 @@ const { Hear } = require("./src/Hear");
 
 
 // bot
-const bot = new Telegraf(Secrets.BOT_TOKEN);
+const bot = new Telegraf(process.env.BOT_TOKEN);
 
 // commandHandler
 const commandHandler = new CommandHandler(flow);
@@ -50,13 +52,15 @@ flow.register(new Scenes().getLocation());
 flow.register(new Scenes().finScene());
 flow.register(new Scenes().symptomScene());
 flow.register(new Scenes().statScene());
+flow.register(new Scenes().tipsScene());
+flow.register(new Scenes().descScene());
 
 
 bot.use(Telegraf.session())
 bot.use(flow.middleware())
 
 
-// bot.telegram.setWebhook("https://.herokuapp.com/" + process.env.BOT_TOKEN);
-// bot.startWebhook('/' + process.env.BOT_TOKEN, null, process.env.PORT)
+bot.telegram.setWebhook("https://bot-covid.herokuapp.com/" + process.env.BOT_TOKEN);
+bot.startWebhook('/' + process.env.BOT_TOKEN, null, process.env.PORT)
 
-bot.launch()
+// bot.launch()

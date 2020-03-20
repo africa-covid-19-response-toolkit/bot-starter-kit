@@ -13,11 +13,13 @@ const Extra = require('telegraf/extra');
 const { Keyboard } = require("./Keyboard");
 const { Log } = require("./Log");
 const { StatHandler } = require("./StatHandler");
+const { FireHandler } = require("./FireHandler");
 const Strings = require("./Strings");
 
  class Scenes {
      constructor() {
          this.keyboard = new Keyboard();
+         this.firehandler = new FireHandler();
      }
 
 
@@ -32,6 +34,11 @@ const Strings = require("./Strings");
              // state
              new StatHandler().fetchData((data) => {
                  ctx.reply(data);
+
+                 // ET stat
+                 new StatHandler().fetchETDate((data) => {
+                     ctx.reply(data);
+                 });
              });
              
 
@@ -54,6 +61,11 @@ const Strings = require("./Strings");
          stat.enter((ctx) => {
              new StatHandler().fetchData((data) => {
                  ctx.reply(data);
+
+                // get ET stat
+                new StatHandler().fetchETDate((data) => {
+                    ctx.reply(data);
+                })
                 
                  // Log
                  new Log(ctx).log("Clicked on Stat button!");
@@ -67,6 +79,44 @@ const Strings = require("./Strings");
          stat.leave((ctx) => {});
 
          return stat;
+     }
+
+     tipsScene() {
+         let tips = new Scene("tipsScene");
+
+         tips.enter((ctx) => {
+
+            // tip a
+            ctx.replyWithPhoto(
+                "https://www.cdc.gov/coronavirus/2019-ncov/images/protect-wash-hands.png",
+                {caption: Strings.tip_a }
+            );
+
+            // tip b
+            ctx.replyWithPhoto(
+                "https://www.cdc.gov/coronavirus/2019-ncov/images/protect-quarantine.png",
+                {caption: Strings.tip_b}
+            );
+
+            // tip c
+            ctx.replyWithPhoto(
+                "https://www.cdc.gov/coronavirus/2019-ncov/images/COVIDweb_06_coverCough.png",
+                {caption: Strings.tip_c}
+            );
+
+            // Log 
+            new Log(ctx).log("Clicked on Tips button!");
+
+            
+            // leave
+            ctx.flow.leave();
+         });
+
+
+         tips.leave((ctx) => {});
+
+
+         return tips;
      }
 
 
@@ -105,7 +155,6 @@ const Strings = require("./Strings");
 
 
          report.enter((ctx) => {
-             ctx.reply("Report");
 
              // enter a scene
              ctx.flow.enter("getnameScene", ctx.flow.state);
@@ -180,19 +229,19 @@ const Strings = require("./Strings");
          const getphone = new Scene("getphoneScene");
 
          getphone.enter((ctx) => {
-             ctx.reply(Strings.getphone);
+             ctx.reply(Strings.getphone, this.keyboard.contactKeyboard());
          });
 
-         getphone.on("message", (ctx) => {
-             let msg = ctx.message.text;
+         getphone.on("contact", (ctx) => {
+             let phone = ctx.update.message.contact.phone_number;
 
-             if (msg == "" || msg == undefined || msg.length != 10) {
+             if (phone == "" || phone == undefined) {
                  ctx.reply(Strings.invalidInput);
 
                  ctx.flow.enter("getphoneScene", ctx.flow.state);
              } else {
                 // save to state
-                ctx.flow.state.phoneNumber = msg;
+                ctx.flow.state.phoneNumber = phone;
 
                 // enter flow
                 ctx.flow.enter("getageScene", ctx.flow.state);
@@ -213,7 +262,7 @@ const Strings = require("./Strings");
         const getage = new Scene("getageScene");
 
         getage.enter((ctx) => {
-            ctx.reply(Strings.getAge);
+            ctx.reply(Strings.getAge, this.keyboard.cancelKeyboard());
         });
 
         getage.on("message", (ctx) => {
@@ -310,7 +359,7 @@ const Strings = require("./Strings");
         const getGPS = new Scene("gpsScene");
 
         getGPS.enter((ctx) => {
-            ctx.reply(Strings.getGPS, this.keyboard.cancelKeyboard());
+            ctx.reply(Strings.getGPS, this.keyboard.gpsKeyboard());
         });
 
         getGPS.on("location", (ctx) => {
@@ -322,7 +371,7 @@ const Strings = require("./Strings");
                 ctx.flow.state.lat = loc.latitude;
                 ctx.flow.state.long = loc.longitude;
 
-                ctx.flow.enter("finScene", ctx.flow.state);
+                ctx.flow.enter("descScene", ctx.flow.state);
             } else {
                 ctx.reply(Strings.invalidInput);
                 
@@ -337,10 +386,42 @@ const Strings = require("./Strings");
      }
 
 
+     descScene() {
+         const desc = new Scene("descScene");
+
+         desc.enter((ctx) => {
+             ctx.reply(Strings.getDesc, this.keyboard.cancelKeyboard());
+         });
+
+
+         desc.on("message", (ctx) => {
+             let msg = ctx.message.text;
+
+
+             if (msg == "" || msg == undefined) {
+                 ctx.reply(Strings.invalidInput);
+
+                 ctx.flow.enter("descScene", ctx.flow.state);
+             } else {
+                 // save to state
+                 ctx.flow.state.desc = msg;
+
+                 ctx.flow.enter("finScene", ctx.flow.state);
+             }
+         });
+
+
+         desc.leave((ctx) => {});
+
+         return desc;
+     }
+
+
      finScene() {
         const fin = new Scene("finScene");
 
         fin.enter((ctx) => {
+            let id = ctx.from.id;
             let fn = ctx.flow.state.full_name;
             let pn = ctx.flow.state.phoneNumber;
             let age = ctx.flow.state.person_age;
@@ -348,12 +429,16 @@ const Strings = require("./Strings");
             let loc = ctx.flow.state.location_name;
             let long = ctx.flow.state.long;
             let lat = ctx.flow.state.lat;
+            let desc = ctx.flow.state.desc;
 
-            ctx.reply(fn + " " + pn + " " + age + " " + gen + " " + loc + " " + long + " " + lat);
+            // ctx.reply(fn + " " + pn + " " + age + " " + gen + " " + loc + " " + long + " " + lat);
 
+            // firebase
+            this.firehandler.pushReport(id, fn, pn, Number(age), gen, loc, long, lat, desc, () => {
+                // leave when saving is done.
 
-            // leave
-            ctx.flow.leave();
+                ctx.flow.leave();
+            });
 
         });
 
