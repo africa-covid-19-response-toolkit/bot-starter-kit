@@ -1,1 +1,3 @@
 node_modules/
+.env.secrets
+KEY/covid19-f7730-firebase-adminsdk-44oki-0507ac7d27.json
