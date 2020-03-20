@@ -45,7 +45,6 @@ flow.register(new Scenes().getNameScene());
 flow.register(new Scenes().getPhone());
 flow.register(new Scenes().getAge());
 flow.register(new Scenes().getGender());
-flow.register(new Scenes().getGPSCoord());
 flow.register(new Scenes().getLocation());
 flow.register(new Scenes().finScene());
 flow.register(new Scenes().symptomScene());

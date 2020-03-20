@@ -279,61 +279,38 @@ const Strings = require("./Strings");
         const getLocation = new Scene("getlocationbynameScene");
 
         getLocation.enter((ctx) => {
-            ctx.reply(Strings.getLocation, this.keyboard.cancelKeyboard());
+            ctx.reply('Send us your exact location!',
+                Extra.markup((markup) => {
+                    return markup.resize()
+                        .keyboard([
+                            markup.locationRequestButton('🗺 Send location')
+                        ])
+                })
+            );
         });
 
-        getLocation.on("message", (ctx) => {
-            let msg = ctx.message.text;
+        getLocation.on("location", (ctx) => {
 
-            if (msg == "" || msg == undefined) {
+            let {location} = ctx.message;
+
+            if (location !== undefined) {
+                // save to state
+
+                ctx.flow.state.lat = location.latitude;
+                ctx.flow.state.long = location.longitude;
+
+                ctx.flow.enter("finScene", ctx.flow.state);
+            } else {
                 ctx.reply(Strings.invalidInput);
 
                 ctx.flow.enter("getlocationbynameScene", ctx.flow.state);
-            } else {
-
-                // save to state
-                ctx.flow.state.location_name = msg;
-
-                // enter flow
-                ctx.flow.enter("gpsScene", ctx.flow.state);
             }
 
         });
 
         getLocation.leave((ctx) => {});
 
-
         return getLocation;
-     }
-
-     getGPSCoord() {
-        const getGPS = new Scene("gpsScene");
-
-        getGPS.enter((ctx) => {
-            ctx.reply(Strings.getGPS, this.keyboard.cancelKeyboard());
-        });
-
-        getGPS.on("location", (ctx) => {
-            let loc = ctx.message.location;
-
-            if (loc != undefined) {
-                // save to state
-
-                ctx.flow.state.lat = loc.latitude;
-                ctx.flow.state.long = loc.longitude;
-
-                ctx.flow.enter("finScene", ctx.flow.state);
-            } else {
-                ctx.reply(Strings.invalidInput);
-                
-                ctx.flow.enter("gpsScene", ctx.flow.state);
-            }
-        });
-
-        getGPS.leave((ctx) => {});
-
-
-        return getGPS;
      }
 
 
