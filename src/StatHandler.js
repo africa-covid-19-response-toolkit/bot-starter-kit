@@ -17,34 +17,38 @@
 
  const fetch = require("node-fetch");
  const Strings = require("./Strings");
+ const covid = require("novelcovid");
 
 
 class StatHandler {
     constructor() {
-        this.url = "https://capi.abren.tech/stats";
     }
 
-    fetchData(cb) {
-        fetch(this.url)
-            .then(res => res.json())
-            .then(data => {
-                let d = data.data[0].total;
-                let msg = Strings.stat_string + "\n\n";
+    async fetchData(cb) {
+        
+        let data = await covid.all();
+        let date = new Date(data.updated * 1000);
+
+        let last_updated = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + '  -  ' + date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
+
+        let msg = `${Strings.stat_string}\n_____________________\n\n${Strings.world_stat_string}\n\n${Strings.stat_total}: ${data.cases}\n${Strings.stat_dead}: ${data.deaths}\n${Strings.stat_reco}: ${data.recovered}\n${Strings.last_update_string}: ${last_updated}`;
 
 
-                // total
-                msg += Strings.stat_total + ": " + d.data[0] + "\n";
-                msg += Strings.stat_quar + ": " + d.data[1] + "\n";
-                msg += Strings.stat_conf + ": " + d.data[2] + "\n";
-                msg += Strings.stat_hosp + ": " + d.data[3] + "\n";
-                msg += Strings.stat_hosp_icu + ": " + d.data[4] + "\n";
-                msg += Strings.stat_reco + ": " +  d.data[5] + "\n";
-                msg += Strings.stat_dead + ": " + d.data[6];
+        
+        // callback
+        cb(msg);
+    }
 
-                // callback
-                cb(msg);
 
-            });
+    async fetchETDate(cb) {
+        let data = await covid.countries();
+
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].country == "Ethiopia") {
+                cb(`${Strings.ethio_stat_string}\n_____________________\n\n${Strings.stat_total}: ${data[i].cases}\n${Strings.stat_dead}: ${data[i].deaths}\n${Strings.stat_reco}: ${data[i].recovered}`);
+                break;
+            }
+        }
     }
 
 }

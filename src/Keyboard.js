@@ -20,8 +20,8 @@ class Keyboard {
 
     mainKeyboard() {
         return Markup.keyboard([
-            [Strings.symptom, Strings.report_string],
-            [Strings.statistics],
+            [Strings.report_string, Strings.symptom],
+            [Strings.statistics, Strings.tips],
             [Strings.about]
         ])
         .oneTime()
@@ -37,6 +37,28 @@ class Keyboard {
         .oneTime()
         .resize()
         .extra();
+    }
+
+
+    gpsKeyboard() {
+        return Extra.markup((markup) => {
+            return markup.resize()
+                .keyboard([
+                    markup.locationRequestButton(Strings.reqGPS),
+                    Strings.cancel
+                ]);
+        });
+    }
+
+
+    contactKeyboard() {
+        return Extra.markup((markup) => {
+            return markup.resize()
+                .keyboard([
+                    markup.contactRequestButton(Strings.getphone),
+                    Strings.cancel
+                ]);
+        });
     }
 
 

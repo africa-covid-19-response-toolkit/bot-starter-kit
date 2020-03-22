@@ -32,6 +32,10 @@ class Hear {
             ctx.flow.enter("symptomScene");
         });
 
+        this.ctx.hears(Strings.tips, (ctx) => {
+            ctx.flow.enter("tipsScene");
+        })
+
         this.ctx.hears(Strings.statistics, (ctx) => {
             ctx.flow.enter("statScene");
         })
