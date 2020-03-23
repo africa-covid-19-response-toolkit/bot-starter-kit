@@ -1,0 +1,6 @@
+{
+    "appSecret": "place_fb_app_secret_here",
+    "pageAccessToken": "place_fb_page_access_token_here",
+    "validationToken": "TOKEN",
+    "serverURL": "place_https_url_here"
+}
