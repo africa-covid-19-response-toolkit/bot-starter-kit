@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "dotmike",
+      "name": "Mike Endale",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/430112?v=4",
+      "profile": "http://www.twitter.com/mikeendale",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "covid-19-bot-starter-kit",
+  "projectOwner": "Ethiopia-COVID19",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
