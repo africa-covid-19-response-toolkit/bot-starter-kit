@@ -6,6 +6,15 @@
   "commit": false,
   "contributors": [
     {
+      "login": "masterSal",
+      "name": "Sal",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/56839725?v=4",
+      "profile": "https://github.com/masterSal",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "dotmike",
       "name": "Mike Endale",
       "avatar_url": "https://avatars1.githubusercontent.com/u/430112?v=4",
