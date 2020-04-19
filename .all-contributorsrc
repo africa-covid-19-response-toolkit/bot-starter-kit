@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "dbworku",
+      "name": "Daniel Worku",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/2839631?v=4",
+      "profile": "http://www.dbworku.com",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "covid-19-bot-starter-kit",
+  "projectOwner": "Ethiopia-COVID19",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
