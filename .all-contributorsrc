@@ -31,6 +31,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "yonasb",
+      "name": "Yonas",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1302071?v=4",
+      "profile": "https://stackshare.io",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
