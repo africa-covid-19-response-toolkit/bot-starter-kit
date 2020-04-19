@@ -6,6 +6,15 @@
   "commit": false,
   "contributors": [
     {
+      "login": "dbworku",
+      "name": "Daniel Worku",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/2839631?v=4",
+      "profile": "http://www.dbworku.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    }
       "login": "masterSal",
       "name": "Sal",
       "avatar_url": "https://avatars0.githubusercontent.com/u/56839725?v=4",

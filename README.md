@@ -20,6 +20,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
+    <td align="center"><a href="http://www.dbworku.com"><img src="https://avatars0.githubusercontent.com/u/2839631?v=4" width="100px;" alt=""/><br /><sub><b>Daniel Worku</b></sub></a><br /><a href="https://github.com/Ethiopia-COVID19/covid-19-bot-starter-kit/commits?author=dbworku" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/masterSal"><img src="https://avatars0.githubusercontent.com/u/56839725?v=4" width="100px;" alt=""/><br /><sub><b>Sal</b></sub></a><br /><a href="https://github.com/Ethiopia-COVID19/covid-19-bot-starter-kit/commits?author=masterSal" title="Code">💻</a></td>
     <td align="center"><a href="http://www.twitter.com/mikeendale"><img src="https://avatars1.githubusercontent.com/u/430112?v=4" width="100px;" alt=""/><br /><sub><b>Mike Endale</b></sub></a><br /><a href="https://github.com/Ethiopia-COVID19/covid-19-bot-starter-kit/commits?author=dotmike" title="Code">💻</a></td>
   </tr>
