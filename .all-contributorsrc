@@ -13,6 +13,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "dotmike",
+      "name": "Mike Endale",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/430112?v=4",
+      "profile": "http://www.twitter.com/mikeendale",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
