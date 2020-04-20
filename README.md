@@ -1,3 +1,7 @@
+<div align="center">
+  <img alt="ACRT Infrastructure Templates" src="acrt_19_bot.png" width="650px">
+</div>
+
 # COVID-19 Bot Starter Kit
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
